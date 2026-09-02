@@ -1,44 +1,87 @@
 <script>
+  import { onMount } from 'svelte';
+  import { supabase } from '../../lib/supabase.js';
   import './Students.css';
 
-  // O'quvchilar ro'yxati (To'lovlarsiz)
-  let students = [
-    { id: 1, name: 'Anvar Toshov', phone: '+998 90 111 22 33', group: 'FN-102', teacher: 'Bobur Jalolov', status: 'Aktiv' },
-    { id: 2, name: 'Malika Zokirova', phone: '+998 93 444 55 66', group: 'PY-201', teacher: 'Sardor Karimov', status: 'Aktiv' },
-    { id: 3, name: 'Shoxrux Alimov', phone: '+998 97 777 88 99', group: 'UX-301', teacher: 'Dilnoza Axmedova', status: 'Muzlatilgan' }
-  ];
-
+  let students = [];
   let searchQuery = '';
   let selectedGroup = 'Barchasi';
   let isModalOpen = false;
+  let isLoading = true;
 
-  let newStudent = { name: '', phone: '', group: 'FN-102', teacher: 'Bobur Jalolov' };
+  let newStudent = { name: '', phone: '', group_name: 'FN-102', teacher: 'Bobur Jalolov' };
 
-  $: filteredStudents = students.filter(student => {
-    const matchesSearch = student.name.toLowerCase().includes(searchQuery.toLowerCase()) || student.phone.includes(searchQuery);
-    const matchesGroup = selectedGroup === 'Barchasi' || student.group === selectedGroup;
-    return matchesSearch && matchesGroup;
-  });
+  // Supabase'dan o'quvchilarni yuklab olish
+  async function fetchStudents() {
+    isLoading = true;
+    const { data, error } = await supabase
+      .from('students')
+      .select('*')
+      .order('id', { ascending: false });
 
-  function handleAddStudent() {
+    if (error) {
+      console.error('Oʻquvchilarni yuklashda xatolik:', error.message);
+    } else {
+      students = data;
+    }
+    isLoading = false;
+  }
+
+  // Yangi o'quvchi qo'shish (Supabase INSERT)
+  async function handleAddStudent() {
     if (!newStudent.name || !newStudent.phone) return;
 
-    students = [
-      {
-        id: Date.now(),
-        ...newStudent,
-        status: 'Aktiv'
-      },
-      ...students
-    ];
+    const { data, error } = await supabase
+      .from('students')
+      .insert([
+        {
+          name: newStudent.name,
+          phone: newStudent.phone,
+          group_name: newStudent.group_name,
+          teacher: newStudent.teacher,
+          status: 'Aktiv'
+        }
+      ])
+      .select();
 
-    newStudent = { name: '', phone: '', group: 'FN-102', teacher: 'Bobur Jalolov' };
-    isModalOpen = false;
+    if (error) {
+      alert('Xatolik yuz berdi: ' + error.message);
+    } else if (data) {
+      students = [data[0], ...students];
+      newStudent = { name: '', phone: '', group_name: 'FN-102', teacher: 'Bobur Jalolov' };
+      isModalOpen = false;
+    }
   }
+
+  // O'quvchini o'chirish (Supabase DELETE)
+  async function deleteStudent(id) {
+    if (!confirm('Haqiqatan ham bu oʻquvchini oʻchirmoqchimisiz?')) return;
+
+    const { error } = await supabase
+      .from('students')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      alert('Oʻchirishda xatolik: ' + error.message);
+    } else {
+      students = students.filter(s => s.id !== id);
+    }
+  }
+
+  onMount(() => {
+    fetchStudents();
+  });
+
+  $: filteredStudents = students.filter(student => {
+    const matchesSearch = student.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          (student.phone && student.phone.includes(searchQuery));
+    const matchesGroup = selectedGroup === 'Barchasi' || student.group_name === selectedGroup;
+    return matchesSearch && matchesGroup;
+  });
 </script>
 
 <div class="students-page">
-  <!-- Boshqaruv paneli -->
   <div class="students-control-panel">
     <div class="search-filter-group">
       <div class="search-input-wrapper">
@@ -63,7 +106,6 @@
     </button>
   </div>
 
-  <!-- Students Jadvali -->
   <div class="table-container">
     <table class="students-table">
       <thead>
@@ -78,34 +120,38 @@
         </tr>
       </thead>
       <tbody>
-        {#each filteredStudents as student, index}
+        {#if isLoading}
           <tr>
-            <td>{index + 1}</td>
-            <td class="font-bold">{student.name}</td>
-            <td>{student.phone}</td>
-            <td><span class="group-tag">{student.group}</span></td>
-            <td>{student.teacher}</td>
-            <td>
-              <span class="status-badge {student.status === 'Aktiv' ? 'active' : 'frozen'}">
-                {student.status}
-              </span>
-            </td>
-            <td>
-              <button class="action-btn" title="Tahrirlash">✏️</button>
-              <button class="action-btn" title="O'chirish">🗑️</button>
-            </td>
+            <td colspan="7" class="empty-row">Yuklanmoqda...</td>
           </tr>
-        {/each}
-        {#if filteredStudents.length === 0}
-          <tr>
-            <td colspan="7" class="empty-row">O‘quvchilar topilmadi</td>
-          </tr>
+        {:else}
+          {#each filteredStudents as student, index (student.id)}
+            <tr>
+              <td>{index + 1}</td>
+              <td class="font-bold">{student.name}</td>
+              <td>{student.phone}</td>
+              <td><span class="group-tag">{student.group_name}</span></td>
+              <td>{student.teacher || '—'}</td>
+              <td>
+                <span class="status-badge {student.status === 'Aktiv' ? 'active' : 'frozen'}">
+                  {student.status}
+                </span>
+              </td>
+              <td>
+                <button class="action-btn" on:click={() => deleteStudent(student.id)} title="O'chirish">🗑️</button>
+              </td>
+            </tr>
+          {/each}
+          {#if filteredStudents.length === 0}
+            <tr>
+              <td colspan="7" class="empty-row">O‘quvchilar topilmadi</td>
+            </tr>
+          {/if}
         {/if}
       </tbody>
     </table>
   </div>
 
-  <!-- Modal -->
   {#if isModalOpen}
     <div class="modal-backdrop" on:click={() => isModalOpen = false}>
       <div class="modal-card" on:click|stopPropagation>
@@ -127,7 +173,7 @@
 
           <div class="form-group">
             <label>Guruh</label>
-            <select bind:value={newStudent.group}>
+            <select bind:value={newStudent.group_name}>
               <option value="FN-102">FN-102 (Frontend)</option>
               <option value="PY-201">PY-201 (Python)</option>
               <option value="UX-301">UX-301 (UI/UX)</option>

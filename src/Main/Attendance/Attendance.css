@@ -1,0 +1,217 @@
+.attendance-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.attendance-control-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e2d;
+  border: 1px solid #2b2b40;
+  border-radius: 12px;
+  padding: 16px 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.live-clock-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #151521;
+  border: 1px solid #2b2b40;
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+
+.clock-icon {
+  font-size: 20px;
+}
+
+.clock-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.clock-label {
+  font-size: 11px;
+  color: #a2a3b7;
+}
+
+.clock-time {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1bc5bd;
+  font-family: monospace;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-field label {
+  font-size: 12px;
+  color: #a2a3b7;
+  font-weight: 500;
+}
+
+.input-field select,
+.input-field input[type="date"],
+.input-field input[type="time"] {
+  padding: 8px 12px;
+  background-color: #151521;
+  border: 1px solid #2b2b40;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  outline: none;
+}
+
+.input-field select:focus,
+.input-field input:focus {
+  border-color: #3699ff;
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #3699ff 0%, #187de4 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(54, 153, 255, 0.3);
+}
+
+.table-container {
+  background-color: #1e1e2d;
+  border: 1px solid #2b2b40;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.attendance-table th {
+  background-color: #171723;
+  color: #565674;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 1px solid #2b2b40;
+  font-size: 11px;
+}
+
+.attendance-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2b2b40;
+  color: #a2a3b7;
+  vertical-align: middle;
+}
+
+.font-bold {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.time-input {
+  padding: 6px 10px;
+  background-color: #151521;
+  border: 1px solid #2b2b40;
+  border-radius: 6px;
+  color: #ffffff;
+  outline: none;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.present {
+  background-color: rgba(27, 197, 189, 0.15);
+  color: #1bc5bd;
+  border: 1px solid rgba(27, 197, 189, 0.3);
+}
+
+.status-badge.late {
+  background-color: rgba(255, 168, 0, 0.15);
+  color: #ffa800;
+  border: 1px solid rgba(255, 168, 0, 0.3);
+}
+
+.status-badge.absent {
+  background-color: rgba(246, 78, 96, 0.15);
+  color: #f64e60;
+  border: 1px solid rgba(246, 78, 96, 0.3);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-action {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-action.absent {
+  background-color: rgba(246, 78, 96, 0.1);
+  color: #f64e60;
+  border-color: rgba(246, 78, 96, 0.2);
+}
+
+.btn-action.absent:hover {
+  background-color: #f64e60;
+  color: #ffffff;
+}
+
+.btn-action.present {
+  background-color: rgba(27, 197, 189, 0.1);
+  color: #1bc5bd;
+  border-color: rgba(27, 197, 189, 0.2);
+}
+
+.btn-action.present:hover {
+  background-color: #1bc5bd;
+  color: #ffffff;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 30px !important;
+  color: #565674;
+}
