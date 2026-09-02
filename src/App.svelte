@@ -9,9 +9,9 @@
   import Teachers from './Main/Teachers/Teachers.svelte';
   import Attendance from './Main/Attendance/Attendance.svelte';
   import Calls from './Main/Calls/Calls.svelte';
-  import KPI from './Main/KPI/KPI.svelte';
+  import KPI from './Main/KPI/EducationalKPI.svelte';
   import Report from './Main/Report/Report.svelte';
-  import Plan from './Main/Plan/Plan.svelte';
+  import Plan from './Main/Plan/MonthlyPlan.svelte';
 
   let activePage = 'dashboard';
 

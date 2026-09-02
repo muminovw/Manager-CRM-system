@@ -1,0 +1,227 @@
+.plan-container {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #121216;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e4e6eb;
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.plan-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.month-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e1e2d;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #2b2b40;
+  font-size: 13px;
+  color: #a2a3b7;
+}
+
+.month-box input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+.loading-state {
+  text-align: center;
+  color: #a2a3b7;
+  padding: 60px;
+}
+
+/* KARTALAR GRIDI */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.plan-card {
+  background: #1e1e2d;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-top h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.badge.success {
+  background: rgba(40, 199, 111, 0.15);
+  color: #28c76f;
+}
+
+.badge.warning {
+  background: rgba(255, 159, 67, 0.15);
+  color: #ff9f43;
+}
+
+.amounts-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background: #12121a;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #2b2b40;
+}
+
+.amounts-row .label {
+  font-size: 11px;
+  color: #a2a3b7;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.amounts-row h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.text-green { color: #28c76f !important; }
+.text-blue { color: #3699ff !important; }
+
+/* PROGRESS BAR */
+.progress-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-bg {
+  width: 100%;
+  height: 10px;
+  background: #12121a;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fg {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+.remaining-text {
+  font-size: 12px;
+  color: #a2a3b7;
+}
+
+/* TAHRIRLASH FORMASI */
+.edit-plan-section {
+  background: #1e1e2d;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.edit-plan-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.input-group label {
+  font-size: 12px;
+  color: #a2a3b7;
+  font-weight: 500;
+}
+
+.input-group input, 
+.input-group textarea {
+  background: #12121a;
+  border: 1px solid #2b2b40;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-group input:focus, .input-group textarea:focus {
+  border-color: #3699ff;
+}
+
+.save-btn {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #3699ff 0%, #1e4db7 100%);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,229 @@
+.kpi-container {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #121216;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e4e6eb;
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.kpi-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.month-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e1e2d;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #2b2b40;
+  font-size: 13px;
+  color: #a2a3b7;
+}
+
+.month-box input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* FORMA GRIDI */
+.kpi-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  background: #1e1e2d;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.kpi-form-grid input, 
+.kpi-form-grid select {
+  background: #12121a;
+  border: 1px solid #2b2b40;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 13px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.kpi-form-grid input:focus, .kpi-form-grid select:focus {
+  border-color: #3699ff;
+}
+
+.mini-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-input label {
+  font-size: 11px;
+  color: #a2a3b7;
+}
+
+.kpi-form-grid button {
+  background: linear-gradient(135deg, #3699ff 0%, #1e4db7 100%);
+  color: #fff;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  grid-column: 1 / -1;
+  transition: 0.2s;
+}
+
+.kpi-form-grid button:hover {
+  opacity: 0.9;
+}
+
+/* TOP PODIUM */
+.podium-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.podium-card {
+  background: #1e1e2d;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.podium-card.rank-1 { border-color: #ffc107; background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, #1e1e2d 100%); }
+.podium-card.rank-2 { border-color: #00cfe8; background: linear-gradient(135deg, rgba(0, 207, 232, 0.1) 0%, #1e1e2d 100%); }
+.podium-card.rank-3 { border-color: #ff9f43; background: linear-gradient(135deg, rgba(255, 159, 67, 0.1) 0%, #1e1e2d 100%); }
+
+.podium-rank {
+  font-size: 13px;
+  font-weight: 700;
+  color: #a2a3b7;
+  margin-bottom: 8px;
+}
+
+.podium-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.podium-role {
+  font-size: 12px;
+  color: #a2a3b7;
+  margin-bottom: 12px;
+}
+
+.podium-score {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3699ff;
+  background: rgba(54, 153, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* JADVAL */
+.table-card {
+  background: #1e1e2d;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-x: auto;
+}
+
+.table-card table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 750px;
+}
+
+.table-card th {
+  background-color: #171723;
+  color: #6c757d;
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #2b2b40;
+}
+
+.table-card td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #2b2b40;
+  color: #c3c4c7;
+  font-size: 13px;
+}
+
+.rank-num {
+  font-weight: 700;
+  color: #3699ff;
+}
+
+.role-badge {
+  background: rgba(137, 80, 252, 0.15);
+  color: #8950fc;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.score-badge {
+  color: #28c76f;
+  background: rgba(40, 199, 111, 0.15);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.delete-btn {
+  background: rgba(246, 78, 96, 0.15);
+  color: #f64e60;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #f64e60;
+  color: #fff;
+}
+
+.center-text {
+  text-align: center;
+  color: #a2a3b7;
+  padding: 40px !important;
+}
