@@ -1,0 +1,191 @@
+.calls-page {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #121216;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e4e6eb;
+}
+
+.calls-page h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* FORMA PANELI */
+.call-form {
+  display: flex;
+  gap: 12px;
+  background: linear-gradient(135deg, #1e1e2d 0%, #151521 100%);
+  padding: 20px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.call-form input, 
+.call-form select {
+  background-color: #12121a;
+  border: 1px solid #2b2b40;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  flex: 1;
+  min-width: 180px;
+  transition: all 0.2s ease;
+}
+
+.call-form input:focus, 
+.call-form select:focus {
+  border-color: #7367f0;
+  box-shadow: 0 0 0 3px rgba(115, 103, 240, 0.15);
+}
+
+.call-form input::placeholder {
+  color: #6c757d;
+}
+
+.status-select {
+  cursor: pointer;
+}
+
+.call-form button {
+  background: linear-gradient(135deg, #7367f0 0%, #5e50ee 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(115, 103, 240, 0.4);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.call-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(115, 103, 240, 0.6);
+}
+
+/* JADVAL */
+.table-container {
+  background: #1e1e2d;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 800px;
+}
+
+.table-container th {
+  background-color: #171723;
+  color: #6c757d;
+  padding: 16px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid #2b2b40;
+  text-transform: uppercase;
+}
+
+.table-container tr {
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #2b2b40;
+}
+
+.table-container tr:hover {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+.table-container td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  color: #c3c4c7;
+  font-size: 14px;
+}
+
+.index-cell {
+  color: #6c757d;
+  font-weight: 600;
+  width: 40px;
+}
+
+.bold {
+  color: #fff;
+  font-weight: 600;
+}
+
+.time-text {
+  font-size: 12px;
+  color: #828690;
+  font-family: monospace;
+}
+
+/* BADGELAR */
+.badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  border: 1px solid transparent;
+}
+
+.badge.success {
+  background-color: rgba(40, 199, 111, 0.15);
+  color: #28c76f;
+  border-color: rgba(40, 199, 111, 0.3);
+}
+
+.badge.danger {
+  background-color: rgba(234, 84, 85, 0.15);
+  color: #ea5455;
+  border-color: rgba(234, 84, 85, 0.3);
+}
+
+.badge.warning {
+  background-color: rgba(255, 159, 67, 0.15);
+  color: #ff9f43;
+  border-color: rgba(255, 159, 67, 0.3);
+}
+
+/* O'CHIRISH TUGMASI */
+.del-btn {
+  background-color: rgba(234, 84, 85, 0.12);
+  border: 1px solid rgba(234, 84, 85, 0.3);
+  color: #ea5455;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.del-btn:hover {
+  background-color: #ea5455;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(234, 84, 85, 0.4);
+}
+
+.center {
+  text-align: center;
+  color: #6c757d;
+  padding: 40px !important;
+}
