@@ -1,33 +1,47 @@
 .attendance-page {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #121216;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e4e6eb;
 }
 
-.attendance-control-panel {
+/* YUQORI PANEL */
+.attendance-header-panel {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1e1e2d;
-  border: 1px solid #2b2b40;
-  border-radius: 12px;
-  padding: 16px 20px;
+  background: linear-gradient(135deg, #1e1e2d 0%, #151521 100%);
+  padding: 20px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
   gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-.live-clock-card {
+.live-clock-box {
   display: flex;
   align-items: center;
   gap: 12px;
-  background-color: #151521;
-  border: 1px solid #2b2b40;
-  padding: 8px 16px;
-  border-radius: 10px;
+  background: rgba(115, 103, 240, 0.1);
+  border: 1px solid rgba(115, 103, 240, 0.3);
+  padding: 10px 16px;
+  border-radius: 12px;
 }
 
 .clock-icon {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .clock-info {
@@ -36,77 +50,71 @@
 }
 
 .clock-label {
-  font-size: 11px;
+  font-size: 10px;
   color: #a2a3b7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .clock-time {
   font-size: 16px;
   font-weight: 700;
-  color: #1bc5bd;
+  color: #7367f0;
   font-family: monospace;
 }
 
-.filter-group {
+.filter-item {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.input-field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.input-field label {
-  font-size: 12px;
+.filter-item label {
+  font-size: 11px;
   color: #a2a3b7;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
-.input-field select,
-.input-field input[type="date"],
-.input-field input[type="time"] {
-  padding: 8px 12px;
-  background-color: #151521;
+.filter-item input[type="date"] {
+  background-color: #12121a;
   border: 1px solid #2b2b40;
+  color: #fff;
+  padding: 9px 14px;
   border-radius: 8px;
-  color: #ffffff;
-  font-size: 13px;
   outline: none;
+  font-size: 13px;
+  transition: border-color 0.2s;
 }
 
-.input-field select:focus,
-.input-field input:focus {
-  border-color: #3699ff;
+.filter-item input[type="date"]:focus {
+  border-color: #7367f0;
 }
 
 .save-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #3699ff 0%, #187de4 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #7367f0 0%, #5e50ee 100%);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 4px 15px rgba(115, 103, 240, 0.4);
   transition: all 0.2s ease;
 }
 
 .save-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(54, 153, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(115, 103, 240, 0.6);
 }
 
+/* JADVAL QISMI */
 .table-container {
-  background-color: #1e1e2d;
-  border: 1px solid #2b2b40;
-  border-radius: 12px;
+  background: #1e1e2d;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow-x: auto;
 }
 
@@ -114,104 +122,191 @@
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 13px;
+  min-width: 900px;
 }
 
 .attendance-table th {
   background-color: #171723;
-  color: #565674;
-  font-weight: 600;
-  padding: 14px 16px;
-  border-bottom: 1px solid #2b2b40;
+  color: #6c757d;
+  padding: 16px 20px;
   font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid #2b2b40;
+  text-transform: uppercase;
+}
+
+.table-row {
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #2b2b40;
+}
+
+.table-row:hover {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .attendance-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid #2b2b40;
-  color: #a2a3b7;
+  padding: 14px 20px;
   vertical-align: middle;
 }
 
-.font-bold {
-  color: #ffffff !important;
+.index-cell {
+  color: #6c757d;
   font-weight: 600;
+  width: 40px;
 }
 
-.time-input {
-  padding: 6px 10px;
-  background-color: #151521;
+/* O'QITUVCHI VA UNING VAQTI BLOVI */
+.teacher-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.teacher-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.target-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.target-label {
+  font-size: 11px;
+  color: #828690;
+}
+
+.mini-time-input {
+  background-color: #12121a;
   border: 1px solid #2b2b40;
-  border-radius: 6px;
-  color: #ffffff;
-  outline: none;
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 6px 12px;
+  color: #00cfe8;
+  padding: 3px 8px;
   border-radius: 6px;
   font-size: 12px;
-  font-weight: 600;
+  font-family: monospace;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
 }
 
-.status-badge.present {
-  background-color: rgba(27, 197, 189, 0.15);
-  color: #1bc5bd;
-  border: 1px solid rgba(27, 197, 189, 0.3);
+.mini-time-input:focus {
+  border-color: #00cfe8;
 }
 
-.status-badge.late {
-  background-color: rgba(255, 168, 0, 0.15);
-  color: #ffa800;
-  border: 1px solid rgba(255, 168, 0, 0.3);
-}
-
-.status-badge.absent {
-  background-color: rgba(246, 78, 96, 0.15);
-  color: #f64e60;
-  border: 1px solid rgba(246, 78, 96, 0.3);
-}
-
-.action-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-action {
-  padding: 6px 12px;
+.subject-badge {
+  background-color: rgba(115, 103, 240, 0.12);
+  color: #7367f0;
+  padding: 5px 10px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
+}
+
+.arrival-time-input {
+  background-color: #12121a;
+  border: 1px solid #2b2b40;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 13px;
+  font-family: monospace;
   cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.arrival-time-input:focus {
+  border-color: #7367f0;
+}
+
+/* BADGE'LAR (Kechikish va holatlar) */
+.late-badge-warning {
+  background-color: rgba(255, 159, 67, 0.15);
+  color: #ff9f43;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  border: 1px solid rgba(255, 159, 67, 0.3);
+}
+
+.on-time-badge {
+  background-color: rgba(40, 199, 111, 0.15);
+  color: #28c76f;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  border: 1px solid rgba(40, 199, 111, 0.3);
+}
+
+.absent-badge-text {
+  color: #ea5455;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.excused-badge-text {
+  color: #00cfe8;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* 3 TA TUGMA DIZayNI */
+.status-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.status-btn {
+  background: #12121a;
+  border: 1px solid #2b2b40;
+  color: #a2a3b7;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
   transition: all 0.2s ease;
-  border: 1px solid transparent;
 }
 
-.btn-action.absent {
-  background-color: rgba(246, 78, 96, 0.1);
-  color: #f64e60;
-  border-color: rgba(246, 78, 96, 0.2);
+.status-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-.btn-action.absent:hover {
-  background-color: #f64e60;
-  color: #ffffff;
+.status-btn.present.active {
+  background-color: rgba(40, 199, 111, 0.2);
+  color: #28c76f;
+  border-color: #28c76f;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(40, 199, 111, 0.2);
 }
 
-.btn-action.present {
-  background-color: rgba(27, 197, 189, 0.1);
-  color: #1bc5bd;
-  border-color: rgba(27, 197, 189, 0.2);
+.status-btn.absent.active {
+  background-color: rgba(234, 84, 85, 0.2);
+  color: #ea5455;
+  border-color: #ea5455;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(234, 84, 85, 0.2);
 }
 
-.btn-action.present:hover {
-  background-color: #1bc5bd;
-  color: #ffffff;
+.status-btn.excused.active {
+  background-color: rgba(0, 207, 232, 0.2);
+  color: #00cfe8;
+  border-color: #00cfe8;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 207, 232, 0.2);
 }
 
-.empty-row {
+.center {
   text-align: center;
-  padding: 30px !important;
-  color: #565674;
+  color: #6c757d;
+  padding: 40px !important;
 }

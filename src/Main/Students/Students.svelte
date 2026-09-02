@@ -9,9 +9,16 @@
   let isModalOpen = false;
   let isLoading = true;
 
-  let newStudent = { name: '', phone: '', group_name: 'FN-102', teacher: 'Bobur Jalolov' };
+  // Formadagi ma'lumotlar
+  let newStudent = { 
+    name: '', 
+    phone: '', 
+    group_name: 'FN-102', 
+    teacher: 'Bobur Jalolov',
+    course: 'Frontend',
+    lead_status: 'Yangi'
+  };
 
-  // Supabase'dan o'quvchilarni yuklab olish
   async function fetchStudents() {
     isLoading = true;
     const { data, error } = await supabase
@@ -20,18 +27,21 @@
       .order('id', { ascending: false });
 
     if (error) {
-      console.error('Oʻquvchilarni yuklashda xatolik:', error.message);
+      console.error('O‘quvchilarni yuklashda xatolik:', error.message);
     } else {
-      students = data;
+      students = data || [];
     }
     isLoading = false;
   }
 
-  // Yangi o'quvchi qo'shish (Supabase INSERT)
   async function handleAddStudent() {
-    if (!newStudent.name || !newStudent.phone) return;
+    if (!newStudent.name || !newStudent.phone) {
+      alert('Iltimos, ism va telefon raqamini kiriting!');
+      return;
+    }
 
-    const { data, error } = await supabase
+    // 1. Students jadvaliga qo'shish
+    const { data: studentData, error: studentError } = await supabase
       .from('students')
       .insert([
         {
@@ -44,16 +54,44 @@
       ])
       .select();
 
-    if (error) {
-      alert('Xatolik yuz berdi: ' + error.message);
-    } else if (data) {
-      students = [data[0], ...students];
-      newStudent = { name: '', phone: '', group_name: 'FN-102', teacher: 'Bobur Jalolov' };
+    if (studentError) {
+      alert('O‘quvchi qo‘shishda xatolik: ' + studentError.message);
+      return;
+    }
+
+    // 2. LEAD jadvaliga qo'shish
+    const { error: leadError } = await supabase
+      .from('lead')
+      .insert([
+        {
+          name: newStudent.name,
+          phone: newStudent.phone,
+          course: newStudent.course,
+          status: newStudent.lead_status
+        }
+      ]);
+
+    if (leadError) {
+      console.error('Lidga qo‘shishda xatolik:', leadError.message);
+      alert('Lidga qo‘shishda xatolik yuz berdi: ' + leadError.message);
+    } else {
+      alert('O‘quvchi va Lid muvaffaqiyatli qo‘shildi!');
+    }
+
+    if (studentData) {
+      students = [studentData[0], ...students];
+      newStudent = { 
+        name: '', 
+        phone: '', 
+        group_name: 'FN-102', 
+        teacher: 'Bobur Jalolov', 
+        course: 'Frontend', 
+        lead_status: 'Yangi' 
+      };
       isModalOpen = false;
     }
   }
 
-  // O'quvchini o'chirish (Supabase DELETE)
   async function deleteStudent(id) {
     if (!confirm('Haqiqatan ham bu oʻquvchini oʻchirmoqchimisiz?')) return;
 
@@ -63,7 +101,7 @@
       .eq('id', id);
 
     if (error) {
-      alert('Oʻchirishda xatolik: ' + error.message);
+      alert('O‘chirishda xatolik: ' + error.message);
     } else {
       students = students.filter(s => s.id !== id);
     }
@@ -163,7 +201,7 @@
         <form on:submit|preventDefault={handleAddStudent} class="modal-form">
           <div class="form-group">
             <label>Ism va Familiya</label>
-            <input type="text" bind:value={newStudent.name} placeholder="Anvar Toshov" required />
+            <input type="text" bind:value={newStudent.name} placeholder="Masalan: Anvar Toshov" required />
           </div>
 
           <div class="form-group">
@@ -171,18 +209,43 @@
             <input type="text" bind:value={newStudent.phone} placeholder="+998 90 123 45 67" required />
           </div>
 
-          <div class="form-group">
-            <label>Guruh</label>
-            <select bind:value={newStudent.group_name}>
-              <option value="FN-102">FN-102 (Frontend)</option>
-              <option value="PY-201">PY-201 (Python)</option>
-              <option value="UX-301">UX-301 (UI/UX)</option>
-            </select>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Guruh</label>
+              <select bind:value={newStudent.group_name}>
+                <option value="FN-102">FN-102 (Frontend)</option>
+                <option value="PY-201">PY-201 (Python)</option>
+                <option value="UX-301">UX-301 (UI/UX)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>O‘qituvchi</label>
+              <input type="text" bind:value={newStudent.teacher} placeholder="Bobur Jalolov" required />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>O‘qituvchi</label>
-            <input type="text" bind:value={newStudent.teacher} placeholder="Bobur Jalolov" required />
+          <!-- LEAD SOZLAMALARI -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Yo‘nalish (Lid uchun)</label>
+              <select bind:value={newStudent.course}>
+                <option value="Frontend">Frontend</option>
+                <option value="Python">Python</option>
+                <option value="SMM">SMM</option>
+                <option value="UX/UI Design">UX/UI Design</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Lid Statusi</label>
+              <select bind:value={newStudent.lead_status}>
+                <option value="Yangi">Yangi</option>
+                <option value="Qo‘ng‘iroq qilindi">Qo‘ng‘iroq qilindi</option>
+                <option value="Sinov darsida">Sinov darsida</option>
+                <option value="Rad etildi">Rad etildi</option>
+              </select>
+            </div>
           </div>
 
           <div class="modal-actions">
